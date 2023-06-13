@@ -20,7 +20,7 @@ jobs:
           description: |
             This is an automatically created issue used to run translations every 3 months.\n
             \n
-            It was created by the `translation-issue.yml` workflow in the `silverstripe/.github` repository.\n
+            It was created by the `.github/workflows/translation-issue.yml` workflow in the [silverstripe/.github](https://github.com/silverstripe/.github/) repository.\n
             \n
             ### Triage instructions (Silverstripe Ltd CMS Squad)\n
             1. Put on the following labels:\n
