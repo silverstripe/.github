@@ -31,11 +31,13 @@ jobs:
             2. Move this issue to the "Ready" column on our internal zenhub board\n
             \n
             ### Implementation instructions:\n
-            1. Create an install of kitchen-sink using the oldest supported minor branch e.g. `2.13`\n
+            1. Create an install of kitchen-sink using the latest next-minor branch e.g. `5`\n
             2. Also install [silverstripe/tx-translator](https://github.com/silverstripe/silverstripe-tx-translator/)\n
-            3. Follow the instructions in the `tx-translator` README.md and do a TX_PULL=1 TX_PUSH=0 run.\n
-            4. This will create lots of pull-requests. Paste links to these pull request on this issue.\n
-            5. Once the pull-requests have been merged, merge them up all the way to the next-minor branch e.g. `5`\n
-            6. Create new patch releases for all supported branches on all repositories that have new translations.\n
-            7. Create a new install of kitchen-sink using the next-minor branch e.g. `5` and also install `tx-translator` again.\n
-            8. Do another `tx-translator` run this time use TX_PULL=0 TX_PUSH=1.\n
+            3. Follow the instructions in the `tx-translator` README.md and do a TX_PULL=0 TX_COLLECT=1 TX_PUSH=1 run.\n
+            4. This may create lots of pull-requests. Paste links to these pull request on this issue.\n
+            5. Once the pull-requests have been merged, create a new install of kitchen-sink using the oldest supported minor branch e.g. `4.13`\n
+            6. Also install [silverstripe/tx-translator](https://github.com/silverstripe/silverstripe-tx-translator/)\n
+            7. Follow the instructions in the `tx-translator` README.md and do a TX_PULL=1 TX_COLLECT=0 TX_PUSH=0 run.\n
+            8. This will create lots of pull-requests. Paste links to these pull request on this issue.\n
+            9. Once these pull-requests have been merged, merge them up all the way through to the next-minor branch e.g. `5`. If this step has been automated then you do not need to do anything.\n
+            10. Create new patch releases for all supported branches on all repositories that have new translations. If this step has been automated then you do not need to do anything.\n
