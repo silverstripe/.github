@@ -18,7 +18,7 @@ jobs:
         with:
           title: JS pull-requests
           description: |
-            This is an automatically created issue used to list automatically created
+            This is an automatically created issue used to list automatically created 
             javascript pull requests every 3 months.\n
             \n
             It was created by the `.github/workflows/js-prs-issue.yml` workflow in the [silverstripe/.github](https://github.com/silverstripe/.github/) repository.\n
@@ -33,7 +33,10 @@ jobs:
             ### Update JS pull-requests:\n
             - [List of update JS pull-requests](https://emtek.net.nz/rhino/tables?t=open-prs&filters={%22title%22%3A%22DEP%20Update%20JS%20dependencies%22})\n
             - Merge these PRs if there are no merge-conflicts\n
-            - If there are merge conflicts in some PRs, then close those PRs and run the steps below in the "Manually creating update JS pull-requests" section below for those relevant modules\n
+            - If there are merge conflicts in some PRs, then manually run the "Update JS" github action in the 
+              affected module. The github action will automatically close the old PR and delete the old branch.
+            - If the new PRs still have merge conflicts, then close those PRs and run the steps below in the 
+              "Manually creating update JS pull-requests" section below for those relevant modules\n
             \n
             ### Manually creating update JS pull-requests:\n
             1. Ensure you have the default branch checked out for the module you are updating e.g. `5`\n
