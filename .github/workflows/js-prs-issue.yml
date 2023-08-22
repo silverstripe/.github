@@ -1,9 +1,10 @@
 name: JS PRs issue
 
 on:
-  # At 7:00am UTC on the 15th of February, May, August, and November
+  # At 12:00 on day-of-month 1 in every 3rd month.
+  # This is 12 hours after update-js workflows run on repos such as silverstripe/asset-admin
   schedule:
-    - cron: '0 7 15 2,5,8,11 *'
+    - cron: '0 12 1 */3 *'
   workflow_dispatch:
 
 jobs:
