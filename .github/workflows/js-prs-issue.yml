@@ -88,7 +88,7 @@ jobs:
             2. Move this issue to the "Ready" column on our internal zenhub board\n
             \n
             ### Update JS pull-requests:\n
-            - [List of update JS pull-requests](https://emtek.net.nz/rhino/tables?t=open-prs&filters={%22title%22%3A%22DEP%20Update%20JS%20dependencies%22})\n
+            - [List of update JS pull-requests](https://rhino.silverstripe.org/?t=open-prs&filters={%22title%22%3A%22DEP%20Update%20JS%20dependencies%22})\n
             - Merge these PRs if there are no merge-conflicts\n
             - If there are merge conflicts in some PRs, then manually run the "Update JS" github action in the 
               affected module. The github action will automatically close the old PR and delete the old branch.
@@ -107,7 +107,7 @@ jobs:
             9. Move this issue to the peer review column on the CMS Squad internal zenhub board\n
             \n
             ### Dependabot pull-requests:\n
-            - [List of dependabot pull-requests](https://emtek.net.nz/rhino/tables?t=open-prs&filters={%22author%22%3A%22dependabot%22})\n
+            - [List of dependabot pull-requests](https://rhino.silverstripe.org/?t=open-prs&filters={%22author%22%3A%22dependabot%22})\n
             - Most of these should be automatically closed if the "Update JS pull-requests" above are merged\n
             - You can make a judgement call as to whether to merge any easy ones that are left\n
             \n
