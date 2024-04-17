@@ -6,12 +6,16 @@ on:
     - cron: '0 7 1 2,5,8,11 *'
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   translation-issue:
     name: Translation issue
     # Only run cron on the silverstripe account
     if: (github.event_name == 'schedule' && github.repository_owner == 'silverstripe') || (github.event_name != 'schedule')
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - name: Translation issue
         uses: silverstripe/gha-issue@v1
