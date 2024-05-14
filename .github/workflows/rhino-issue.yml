@@ -1,0 +1,39 @@
+name: Rhino issue
+
+on:
+  # At 17:00 UTC every Tuesday
+  schedule:
+    - cron: '0 17 * * 2'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  rhino-issue:
+    name: Rhino issue
+    # Only run cron on the silverstripe account
+    if: (github.event_name == 'schedule' && github.repository_owner == 'silverstripe') || (github.event_name != 'schedule')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Rhino issue
+        uses: silverstripe/gha-issue@v1
+        with:
+          title: Broken builds and merge-ups
+          close_existing: true
+          description: |
+            This is an automatically created issue used to remind the Silverstripe CMS Squad to look at broken builds and merge-ups every Tuesday.\n
+            \n
+            It was created by the `.github/workflows/rhino-issue.yml` workflow in the [silverstripe/.github](https://github.com/silverstripe/.github/) repository.\n
+            \n
+            ### Triage instructions\n
+            1. Put on the following label:\n
+              - `type/other`\n
+            2. Move this issue to the "Ready" column on our internal zenhub board\n
+            \n
+            ### Broken builds:\n
+            - https://rhino.silverstripe.org/?t=builds\n
+            \n
+            ### Merge-ups:\n
+            - https://rhino.silverstripe.org/?t=merge-ups\n
