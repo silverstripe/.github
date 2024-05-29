@@ -1,10 +1,10 @@
 name: JS PRs issue
 
 on:
-  # At 12:00 on day-of-month 1 in every 3rd month.
+  # At 12:00 on day-of-month 1 in March and September.
   # This is 12 hours after update-js workflows run on repos such as silverstripe/asset-admin
   schedule:
-    - cron: '0 12 1 */3 *'
+    - cron: '0 12 1 3,9 *'
   workflow_dispatch:
 
 permissions: {}
@@ -18,68 +18,13 @@ jobs:
     permissions:
       issues: write
     steps:
-      - name: Get Alerts List
-        id: get-alerts-list
-        run: |
-          ALERTS_LIST=''
-
-          # Get list of supported modules
-          curl -s -o __modules.json https://raw.githubusercontent.com/silverstripe/supported-modules/main/repositories.json
-          # If we can't parse the JSON at all, $MODULES will be an empty string and that means we couldn't fetch the file.
-          MODULES=$(jq -e '.' __modules.json) || true
-          if [[ $MODULES == "" ]]; then
-            # If there is some error getting the file, the error will be in the __modules.json file - importantly, not in JSON format.
-            echo "Cannot parse supported-modules JSON. Aborting. The content we tried to parse was:"
-            cat __modules.json
-            # Instead of exiting, output an error instead of the dependabot alert list.
-            # We don't have any reporting indicating if this workflow fails, so this is a good way to track that.
-            ALERTS_LIST='Failed to parse supported-modules JSON. Please check the GitHub action log.'
-          else
-            # Create a list of markdown links for supported module dependabot stuff
-            ALERTS_LIST=$(php -r '
-              $json = json_decode(file_get_contents("__modules.json"), true);
-              foreach ($json["supportedModules"] as $module) {
-                # Assumes CMS 5 is the most recent stable version
-                if (!isset($module["majorVersionMapping"]["5"])) {
-                  continue;
-                }
-                $githubRef = $module["github"];
-                $branch = end($module["majorVersionMapping"]["5"]);
-                $packageJsonURL = "https://raw.githubusercontent.com/$githubRef/$branch/package.json";
-                $headers = get_headers($packageJsonURL);
-                # $headers[0] includes the response code in a format like: "HTTP/1.1 404 Not Found"
-                $response = $headers[0];
-                # Skip modules which do not have a package.json file
-                if (strpos($response, "404") !== false) {
-                  continue;
-                }
-                # If we have something other than 404 (above) or 200, output an error string for the list
-                # and move on.
-                if (strpos($response, "200") === false) {
-                  echo "- $githubRef: Unable to check package.json, response was $response.\\n";
-                  continue;
-                }
-
-                # If we get here, we have a package.json file so we should add a dependabot alerts URL to the list
-                echo "- [$githubRef](https://github.com/$githubRef/security/dependabot)\\n";
-              }
-            ')
-          fi
-          
-          echo 'ALERTS_LIST is:'
-          echo $ALERTS_LIST
-          echo "alerts_list=$ALERTS_LIST" >> $GITHUB_OUTPUT
-
-        
       - name: JS PRs issue
         uses: silverstripe/gha-issue@v1
-        env:
-          ALERTS_LIST: ${{ steps.get-alerts-list.outputs.alerts_list }}
         with:
           title: JS pull-requests
           description: |
             This is an automatically created issue used to list automatically created 
-            javascript pull requests every 3 months.\n
+            javascript pull requests every 6 months.\n
             \n
             It was created by the `.github/workflows/js-prs-issue.yml` workflow in the [silverstripe/.github](https://github.com/silverstripe/.github/) repository.\n
             \n
@@ -108,20 +53,3 @@ jobs:
             7. Git commit, push the changes and create a pull-request\n
             8. List the pull-request(s) on this issue\n
             9. Move this issue to the peer review column on the CMS Squad internal zenhub board\n
-            \n
-            ### Dependabot pull-requests:\n
-            - [List of dependabot pull-requests](https://rhino.silverstripe.org/?t=open-prs&filters={%22author%22%3A%22dependabot%22})\n
-            - Most of these should be automatically closed if the "Update JS pull-requests" above are merged\n
-            - You can make a judgement call as to whether to merge any easy ones that are left\n
-            \n
-            ### Dependabot alerts:\n
-            After all of the above have been completed and resolved, check for any outstanding dependabot alerts:\n
-            ${{ env.ALERTS_LIST }}
-
-      - name: Delete temporary files
-        shell: bash
-        if: always()
-        run: |
-          if [[ -f __modules.json ]]; then
-            rm __modules.json
-          fi
