@@ -91,6 +91,8 @@ jobs:
             ### Dependabot pull-requests:\n
             See the [list of dependabot pull-requests](https://rhino.silverstripe.org/?t=open-prs&filters={%22author%22%3A%22dependabot%22}) in Rhino.\n
             - Make a quick determination as to whether the vulnerability fixed by the PR warrants using our security process\n
+              - You can check to see if the dependabot alert affects non-dev dependencies by running `yarn audit --groups dependencies` locally on default branch of the module.\n
+              - Use `yarn audit --groups devDependencies` to see dev-only dependencies.\n
             - Merge these PRs if there are no merge-conflicts and CI is green\n
             - If there are conflicts or CI isn't green, get dependabot to recreate the PR\n
             - If there are still problems, manually resolve them and open your own PR\n
