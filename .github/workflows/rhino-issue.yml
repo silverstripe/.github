@@ -44,7 +44,7 @@ jobs:
         uses: silverstripe/gha-issue@v1
         if: steps.check_for_existing_open_issue.outputs.has_issue == 'false'
         with:
-          title: Broken builds and merge-ups
+          title: Broken builds, merge-ups, and licenses
           close_existing: true
           description: |
             This is an automatically created issue used to remind the Silverstripe CMS Squad to look at broken builds and merge-ups every Tuesday.\n
@@ -61,3 +61,9 @@ jobs:
             \n
             ### Merge-ups:\n
             - https://rhino.silverstripe.org/?t=merge-ups\n
+            \n
+            ### Licenses:\n
+            - The cron only runs on the default branch
+            - Manually run the workflow on other supported branches, including minor and patch
+            - https://github.com/silverstripe/recipe-kitchen-sink/actions/workflows/licenses.yml\n
+            \n
