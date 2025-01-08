@@ -63,7 +63,7 @@ jobs:
             - https://rhino.silverstripe.org/?t=merge-ups\n
             \n
             ### Licenses:\n
-            - The cron only runs on the default branch
-            - Manually run the workflow on other supported branches, including minor and patch
+            - The cron only runs on the default branch\n
+            - Manually run the workflow on other supported branches, including minor and patch\n
             - https://github.com/silverstripe/recipe-kitchen-sink/actions/workflows/licenses.yml\n
             \n
