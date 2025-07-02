@@ -1,10 +1,10 @@
 name: JS PRs issue
 
 on:
-  # At 12:00 on day-of-month 1 in March and September.
+  # At 12:00 on day-of-month 3 in February and August
   # This is 12 hours after update-js workflows run on repos such as silverstripe/asset-admin
   schedule:
-    - cron: '0 12 1 3,9 *'
+    - cron: '0 12 3 2,8 *'
   workflow_dispatch:
 
 permissions: {}
@@ -33,6 +33,7 @@ jobs:
                - `type/enhancement`\n
                - `impact/low`\n
                - `affects/v5`\n
+               - `affects/v6`\n
             2. Move this issue to the "Ready" column on our internal zenhub board\n
             \n
             ### Update JS pull-requests:\n

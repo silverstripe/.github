@@ -1,9 +1,9 @@
 name: Dependabot PRs issue
 
 on:
-  # At 12:00 on day-of-month 1 in March, June, September, and December.
+  # At 12:00 on day-of-month 3 in February, May, August, and November
   schedule:
-    - cron: '0 12 1 3,6,9,12 *'
+    - cron: '0 12 3 2,5,8,11 *'
   workflow_dispatch:
 
 permissions: {}
