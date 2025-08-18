@@ -58,11 +58,12 @@ jobs:
               - `type/other`\n
             2. Move this issue to the "Ready" column on our internal zenhub board\n
             \n
-            ### Broken builds:\n
-            - https://rhino.silverstripe.org/?t=builds\n
-            \n
             ### Merge-ups:\n
             - https://rhino.silverstripe.org/?t=merge-ups\n
+            - After resolving, wait until the next rhino builds queued job has run\n
+            \n
+            ### Broken builds:\n
+            - https://rhino.silverstripe.org/?t=builds\n
             \n
             ### Licenses:\n
             - The cron only runs on the default branch\n
